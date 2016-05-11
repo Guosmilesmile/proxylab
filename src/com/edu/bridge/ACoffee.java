@@ -5,6 +5,13 @@ public abstract class ACoffee {
 	public AFoam foam;
 	public AMilk milk;
 	public abstract String getCoffeeName();
+	public String makeCoffee() {
+		String result = "coffeename is"+getCoffeeName()+",";
+		result+= " size is "+ getCupSize().getSize()+",";
+		result+= " milk is "+getMilk().getMilkWeight()+",";
+		result+=" foam is "+getFoam().getFoamWeight();
+		return result;
+	}
 	public ACoffee(ACupSize cupSize, AFoam foam, AMilk milk) {
 		super();
 		this.cupSize = cupSize;
@@ -29,4 +36,5 @@ public abstract class ACoffee {
 	public void setMilk(AMilk milk) {
 		this.milk = milk;
 	}
+	
 }
