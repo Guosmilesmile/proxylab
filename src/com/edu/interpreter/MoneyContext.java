@@ -36,7 +36,7 @@ public class MoneyContext {
 	public MoneyContext(String content) {
 		this.content = content;
 		lines = content.split(" ");
-		CurrentIndex = lines.length;
+		CurrentIndex = lines.length-1;
 	}
 
 	/**
@@ -55,9 +55,8 @@ public class MoneyContext {
 			CurrentIndex--;
 		} else {
 			int count = 0;
-			while (count == 1) {
+			while (count == 0) {
 				if (Unit.contains(lines[CurrentIndex])) {
-					CurrentIndex++;
 					count++;
 				}else{
 					list.add(lines[CurrentIndex]);
