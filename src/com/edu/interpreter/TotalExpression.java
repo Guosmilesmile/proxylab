@@ -2,33 +2,44 @@ package com.edu.interpreter;
 
 import java.util.List;
 
-public class TotalExpression {
+public class TotalExpression implements Expression{
 
-	public int interpret(MoneyContext context) {
+	@Override
+	public double  interpret(MoneyContext context) throws TranslateException {
+		double  total = 0;
 		int index = 0;
 		while(true){
-			List<String> list = context.getBlock();
-			if(list.size()==0)
+			context.getNextBlock();
+			if(context.getCurrentblock().size()==0)
 				break;
-			if(index == 0){
-				int total = new ThousandExpression().interpret(list);
-			}else if(index == 1 ){
-				int total = new BillionExpression().interpret(list);
-			}else if(index == 2){
-				int total = new TrillionExpression().interpret(list);
-			}
-			if(list.size()==1){
-				if(list.get(0).equals("million")){
+			if(context.getCurrentblock().size()==1){
+				if(context.getCurrentblock().get(0).equals("million")){
 					index = 1;
-				}else if(list.get(0).equals("billion")){
+					context.getNextBlock();
+				}else if(context.getCurrentblock().get(0).equals("billion")){
 					index = 2;
-				}else if(list.get(0).equals("trillion")){
+					context.getNextBlock();
+				}else if(context.getCurrentblock().get(0).equals("trillion")){
 					index = 3;
+					context.getNextBlock();
 				}
-				
 			}
+			if(index == 0){
+				total += new ThousandExpression().interpret(context);
+				index = -1;
+			}else if(index == 1 ){
+				total += new MillionExpression().interpret(context);
+				index = -1;
+			}else if(index == 2){
+				total += new BillionExpression().interpret(context);
+				index = -1;
+			}else if(index == 3){
+				total += new TrillionExpression().interpret(context);
+				index = -1;
+			}
+			
 		}
-		return 0;
+		return total;
 	}
 
 }

@@ -5,10 +5,11 @@ import java.util.List;
 public class TrillionExpression implements Expression{
 
 	@Override
-	public int interpret(List<String> lines) {
-		// TODO Auto-generated method stub
-		return 0;
+	public double interpret(MoneyContext context) throws TranslateException {
+		double x  = 1.0*1000*1000000000;
+		return new ThousandExpression().interpret(context)*x;
 	}
+
 
 
 }

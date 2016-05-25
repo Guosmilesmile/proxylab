@@ -8,5 +8,5 @@ public interface Expression {
 	 * @param context
 	 * @return
 	 */
-	public int interpret(List<String> lines);
+	public double interpret(MoneyContext context) throws TranslateException;
 }

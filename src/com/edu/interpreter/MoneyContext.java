@@ -5,10 +5,9 @@ import java.util.List;
 
 public class MoneyContext {
 	/**
-	 * 数值
+	 * 当前块
 	 */
-	public int money = 0;
-
+	private List<String> Currentblock;
 	/**
 	 * 需要转换的文字
 	 */
@@ -39,15 +38,17 @@ public class MoneyContext {
 		CurrentIndex = lines.length-1;
 	}
 
+	
 	/**
 	 * 获取当前块、以每个单位为一块，每个单位间的三位数字为一块.
 	 * 
 	 * @return
 	 */
-	public List<String> getBlock() {
+	public void getNextBlock() {
 		List<String> list = new ArrayList<String>();
 		if(CurrentIndex==-1){
-			return list;
+			this.Currentblock = list;
+			return ;
 		}
 		int LastIndex = this.CurrentIndex;
 		if (Unit.contains(lines[CurrentIndex])) {
@@ -66,6 +67,18 @@ public class MoneyContext {
 				}
 			}
 		}
-		return list;
+		this.Currentblock = list;
 	}
+
+	public List<String> getCurrentblock() {
+		return Currentblock;
+	}
+
+	public void setCurrentblock(List<String> currentblock) {
+		this.Currentblock = currentblock;
+	}
+	
+	
+	
+	
 }
